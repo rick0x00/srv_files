@@ -1,0 +1,10 @@
+Vagrant.configure("2") do |config|
+    config.vm.box = "debian/jessie64"
+    config.vm.provider "virtualbox" do |v|
+        v.gui = true
+        v.name = "samba_lab"
+        v.cpus = 2
+        v.memory = 1024
+    end
+    config.vm.network "public_network", ip: "192.168.0.250"
+end
