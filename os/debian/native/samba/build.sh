@@ -46,22 +46,22 @@ function make_share_folders_tree() {
     mkdir -p ${share_folders_trunk}{public,private}
     chmod 774 ${share_folders_trunk}public
     chmod 770 ${share_folders_trunk}private
-    chown nobody:mogroup ${share_folders_trunk}public
+    chown nobody:nogroup ${share_folders_trunk}public
     chown ${samba_admin_user}:users ${share_folders_trunk}private
 }
 
 function configure_smb_dot_conf() {
     cp ./complement_smb.conf /tmp/
-    sed -i "/\$share_folders_trunk/$share_folders_trunk/" /tmp/complement_smb.conf
-    sed -i "/\$samba_admin_user/$samba_admin_user/" /tmp/complement_smb.conf
+    sed -i "s|\$share_folders_trunk|$share_folders_trunk|" /tmp/complement_smb.conf
+    sed -i "s/\$samba_admin_user/$samba_admin_user/" /tmp/complement_smb.conf
     cp /etc/samba/smb.conf /etc/samba/smb.conf.bkp
     cat /tmp/complement_smb.conf >> /etc/samba/smb.conf
 }
 
 function start_samba() {
-    systemctl enable --now samba
-    systemctl restart samba
-    systemctl start samba
+    systemctl enable --now smbd
+    systemctl restart smbd
+    systemctl start smbd
     # /usr/sbin/smbd -FS --no-process-group # execute inside docker container
 }
 # end main functions
@@ -74,8 +74,8 @@ function start_samba() {
 # ============================================================ #
 # start main executions of code
 
-install_samba;
-make_admin_user;
-make_share_folders_tree;
-configure_smb_dot_conf;
+#install_samba;
+#make_admin_user;
+#make_share_folders_tree;
+#configure_smb_dot_conf;
 start_samba;
