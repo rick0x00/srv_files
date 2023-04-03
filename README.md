@@ -1,5 +1,3 @@
 # Files Server
 
-## SAMBA, SMB/CIFS
-
-### [SAMBA File Server for Debian System Running Natively](/os/debian/native/samba/)
+## [SAMBA File Server](/tecnology/samba/README.md)
