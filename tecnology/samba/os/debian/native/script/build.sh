@@ -59,9 +59,9 @@ function configure_smb_dot_conf() {
 }
 
 function start_samba() {
-    systemctl enable --now smbd
-    systemctl restart smbd
-    systemctl start smbd
+    systemctl enable --now smbd nmbd
+    systemctl restart smbd nmbd
+    systemctl start smbd nmbd
     # /usr/sbin/smbd -FS --no-process-group # execute inside docker container
 }
 # end main functions
@@ -74,8 +74,8 @@ function start_samba() {
 # ============================================================ #
 # start main executions of code
 
-#install_samba;
-#make_admin_user;
-#make_share_folders_tree;
-#configure_smb_dot_conf;
+install_samba;
+make_admin_user;
+make_share_folders_tree;
+configure_smb_dot_conf;
 start_samba;
