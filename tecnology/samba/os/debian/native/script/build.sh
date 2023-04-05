@@ -33,7 +33,7 @@ share_folders_trunk="/var/lib/file_server/samba/"
 # start main functions
 function install_samba() {
     apt update
-    apt install -y samba
+    apt install -y samba smbclient
 }
 
 function make_admin_user() {
