@@ -50,12 +50,26 @@ function make_share_folders_tree() {
     chown ${samba_admin_user}:users ${share_folders_trunk}private
 }
 
+function build_smb_dot_conf() {
+    cp -r ./config/ /tmp/
+    touch /etc/samba/new_smb.conf
+    cat /tmp/config/global/head.conf > /etc/samba/new_smb.conf
+    cat /tmp/config/global/browsing.conf >> /etc/samba/new_smb.conf
+    cat /tmp/config/global/debugging.conf >> /etc/samba/new_smb.conf
+    cat /tmp/config/global/authentication.conf >> /etc/samba/new_smb.conf
+    cat /tmp/config/global/misc.conf >> /etc/samba/new_smb.conf
+    cat /tmp/config/share/head.conf >> /etc/samba/new_smb.conf
+    cat /tmp/config/share/shares.conf >> /etc/samba/new_smb.conf
+}
+
 function configure_smb_dot_conf() {
-    cp ./complement_smb.conf /tmp/
-    sed -i "s|\$share_folders_trunk|$share_folders_trunk|" /tmp/complement_smb.conf
-    sed -i "s/\$samba_admin_user/$samba_admin_user/" /tmp/complement_smb.conf
-    cp /etc/samba/smb.conf /etc/samba/smb.conf.bkp
-    cat /tmp/complement_smb.conf >> /etc/samba/smb.conf
+    mv /etc/samba/smb.conf /etc/samba/smb.conf.bkp_$(date +%Y%m%d%H%M%S)
+    #cp ./complement_smb.conf /tmp/
+    sed -i "s|\$share_folders_trunk|$share_folders_trunk|" /etc/samba/new_smb.conf
+    sed -i "s/\$samba_admin_user/$samba_admin_user/" /etc/samba/new_smb.conf
+    cp /etc/samba/new_smb.conf /etc/samba/smb.conf
+    mv /etc/samba/new_smb.conf /etc/samba/new_smb.conf.bkp_$(date +%Y%m%d%H%M%S)
+    #cat /tmp/complement_smb.conf >> /etc/samba/smb.conf
 }
 
 function start_samba() {
@@ -77,5 +91,6 @@ function start_samba() {
 install_samba;
 make_admin_user;
 make_share_folders_tree;
+build_smb_dot_conf;
 configure_smb_dot_conf;
 start_samba;
