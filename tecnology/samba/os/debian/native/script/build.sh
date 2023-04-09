@@ -21,6 +21,8 @@ fi
 # start set variables
 samba_admin_user="sysadmin"
 samba_admin_pass="sysadmin"
+samba_common_user="xpto"
+samba_common_pass="xpto"
 share_folders_trunk="/var/lib/file_server/samba/"
 # end set variables
 # ============================================================ #
@@ -37,9 +39,15 @@ function install_samba() {
 }
 
 function make_admin_user() {
-    useradd --no-create-home --shell /sbin/nologin --password $samba_admin_pass $samba_admin_user
+    useradd --create-home --shell /bin/bash --password $samba_admin_pass $samba_admin_user
     echo -e "${samba_admin_pass}\n${samba_admin_pass}\n" | smbpasswd -a $samba_admin_user
     adduser $samba_admin_user users
+}
+
+function make_common_user() {
+    useradd --no-create-home --shell /sbin/nologin --password $samba_common_pass $samba_common_user
+    echo -e "${samba_common_pass}\n${samba_common_pass}\n" | smbpasswd -a $samba_common_user
+    adduser $samba_common_user users
 }
 
 function make_share_folders_tree() {
@@ -90,6 +98,7 @@ function start_samba() {
 
 install_samba;
 make_admin_user;
+make_common_user;
 make_share_folders_tree;
 build_smb_dot_conf;
 configure_smb_dot_conf;
