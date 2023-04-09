@@ -52,7 +52,7 @@ function make_common_user() {
 
 function make_share_folders_tree() {
     mkdir -p ${share_folders_trunk}{public,private}
-    chmod 774 ${share_folders_trunk}public
+    chmod 777 ${share_folders_trunk}public
     chmod 770 ${share_folders_trunk}private
     chown nobody:nogroup ${share_folders_trunk}public
     chown ${samba_admin_user}:users ${share_folders_trunk}private
