@@ -84,6 +84,8 @@ function configure_smb_dot_conf() {
     mv /etc/samba/smb.conf /etc/samba/smb.conf.bkp_$(date +%Y%m%d%H%M%S)
     #cp ./complement_smb.conf /tmp/
     sed -i "s/\$smb_port/${smb_port[0]} ${smb_port[1]}/" /etc/samba/new_smb.conf
+    sed -i "s/\$dgram_port/$dgram_port/" /etc/samba/new_smb.conf
+    sed -i "s/\$nbt_port/$nbt_port/" /etc/samba/new_smb.conf
     sed -i "s|\$share_folders_trunk|$share_folders_trunk|" /etc/samba/new_smb.conf
     sed -i "s/\$samba_admin_user/$samba_admin_user/" /etc/samba/new_smb.conf
     cp /etc/samba/new_smb.conf /etc/samba/smb.conf
