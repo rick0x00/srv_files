@@ -24,6 +24,15 @@ samba_admin_pass="sysadmin"
 samba_common_user="xpto"
 samba_common_pass="xpto"
 share_folders_trunk="/var/lib/file_server/samba/"
+
+smb_port[0]="445" #  Server Message Block (SMB) traffic
+smb_port[1]="139" # NetBIOS session service traffic
+dgram_port="138" #  NetBIOS datagram traffic
+nbt_port="137" #  NetBIOS name services traffic
+
+workdir="/etc/samba/"
+volumes=("/etc/samba/" "/var/lib/samba/" "/var/log/samba/")
+expose_ports="${smb_port[0]}/tcp ${smb_port[1]}/tcp ${dgram_port}/udp ${nbt_port}/udp"
 # end set variables
 # ============================================================ #
 # start definition functions
