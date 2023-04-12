@@ -31,7 +31,7 @@ dgram_port="138" #  NetBIOS datagram traffic
 nbt_port="137" #  NetBIOS name services traffic
 
 workdir="/etc/samba/"
-volumes=("/etc/samba/" "/var/lib/samba/" "/var/log/samba/")
+persistence_volumes=("/etc/samba/" "/var/lib/samba/" "/var/log/samba/" "/var/lib/file_server/")
 expose_ports="${smb_port[0]}/tcp ${smb_port[1]}/tcp ${dgram_port}/udp ${nbt_port}/udp"
 # end set variables
 # ============================================================ #
