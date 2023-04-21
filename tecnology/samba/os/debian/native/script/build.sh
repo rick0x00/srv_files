@@ -3,7 +3,7 @@
 # ============================================================ #
 # Tool Created date: 26 mar 2023                               #
 # Tool Created by: Henrique Silva (rick.0x00@gmail.com)        #
-# Tool Name: status_bar                                        #
+# Tool Name: srv_files (samba)                                 #
 # Description: Script for help to create samba File Server     #
 # License: MIT License                                         #
 # Remote repository 1: https://github.com/rick0x00/srv_files   #
@@ -109,10 +109,10 @@ function start_samba() {
 # ============================================================ #
 # start main executions of code
 
-#install_samba;
-#make_admin_user;
-#make_common_user;
-#make_share_folders_tree;
+install_samba;
+make_admin_user;
+make_common_user;
+make_share_folders_tree;
 build_smb_dot_conf;
 configure_smb_dot_conf;
-#start_samba;
+start_samba;
