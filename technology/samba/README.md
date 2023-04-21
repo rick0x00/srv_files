@@ -9,7 +9,7 @@ Steps to Install And Configure
 - Tool: Shell Script
 
 ```bash
-git clone https://raw.githubusercontent.com/rick0x00/srv_files/master/os/debian/native/samba/build.sh
-cd srv_files/master/os/debian/native/samba/
+git clone https://github.com/rick0x00/srv_files.git
+cd srv_files/technology/samba/os/debian/native/script
 bash build.sh
 ```
