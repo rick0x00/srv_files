@@ -2,4 +2,4 @@
 
 My Tool to Create File servers
 
-## [SAMBA File Server](/tecnology/samba/README.md)
+## [SAMBA File Server](/technology/samba/README.md)
